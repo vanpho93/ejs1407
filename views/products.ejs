@@ -7,15 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <h1>Khoa Pham NodeJS <%- a %></h1>
-        <h1><%- name %></h1>
-
-        <% if (isAdmin) { %>
-            <a href="#">Vao trang quan ly</a>
-        <%} else { %>
-            <p>Ban khong phai adming</p>
-        <% } %>
-
+        <% mang.forEach(e => { %>
+            <h3><%= e %></h3>
+        <% }); %>
     </body>
     <script src="/reload/reload.js"></script>
 </html>
