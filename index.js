@@ -29,6 +29,12 @@ app.post('/add', upload.single('image'), (req, res) => {
     res.redirect('/');
 });
 
+app.get('/remove/:id', (req, res) => {
+    const { id } = req.params;
+    Product.removeProduct(id);
+    res.redirect('/admin');
+});
+
 app.listen(3000, () => console.log('Server started!'))
 
 reload(app);
