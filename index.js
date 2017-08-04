@@ -15,6 +15,11 @@ app.get('/', (req, res) => {
     res.render('index', { arrProducts });
 });
 
+app.get('/admin', (req, res) => {
+    const arrProducts =  Product.getAllProducts();
+    res.render('admin', { arrProducts });
+});
+
 app.get('/add', (req, res) => res.render('add'));
 
 app.post('/add', upload.single('image'), (req, res) => {
