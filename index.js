@@ -1,6 +1,7 @@
 const express = require('express');
 const reload = require('reload');
 const Product = require('./Product');
+const upload = require('./uploadConfig');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -12,6 +13,14 @@ app.locals.title = 'Hello EJS';
 app.get('/', (req, res) => {
     const arrProducts =  Product.getAllProducts();
     res.render('index', { arrProducts });
+});
+
+app.get('/add', (req, res) => res.render('add'));
+
+app.post('/add', upload.single('image'), (req, res) => {
+    const { title, video, desc } = req.body;
+    const image = req.file.filename;
+    res.send({ title, video, desc, image });
 });
 
 app.listen(3000, () => console.log('Server started!'))
