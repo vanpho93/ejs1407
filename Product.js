@@ -10,6 +10,11 @@ class Product {
     static getAllProducts() {
         return arrProducts;
     }
+
+    static addNewProduct(title, desc, image, video) {
+        const product = new Product(arrProducts.length, title, desc, image, video);
+        arrProducts.push(product);
+    }
 }
 
 const arrProducts = [

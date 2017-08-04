@@ -20,7 +20,8 @@ app.get('/add', (req, res) => res.render('add'));
 app.post('/add', upload.single('image'), (req, res) => {
     const { title, video, desc } = req.body;
     const image = req.file.filename;
-    res.send({ title, video, desc, image });
+    Product.addNewProduct(title, desc, image, video);
+    res.redirect('/');
 });
 
 app.listen(3000, () => console.log('Server started!'))
