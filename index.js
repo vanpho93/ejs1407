@@ -12,10 +12,6 @@ app.get('/', (req, res) => {
     res.render('index', { arrProducts });
 });
 
-app.get('/products', (req, res) => {
-    res.render('products', { mang: ['NodeJS', 'ReactJS', 'React Native'] });
-});
-
 app.listen(3000, () => console.log('Server started!'))
 
 reload(app);
