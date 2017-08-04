@@ -35,6 +35,12 @@ app.get('/remove/:id', (req, res) => {
     res.redirect('/admin');
 });
 
+app.get('/update/:id', (req, res) => {
+    const { id } = req.params;
+    const product = Product.getProductById(id);
+    res.render('update', { product });
+});
+
 app.listen(3000, () => console.log('Server started!'))
 
 reload(app);

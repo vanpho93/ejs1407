@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="../">
+        <title>Add Product</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <form action="/update/<%= product.id %>" method="POST" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Title" value="<%= product.title %>">
+            <br><br>
+            <input type="text" name="desc" placeholder="Description" value="<%= product.desc %>">
+            <br><br>
+            <input type="text" name="video" placeholder="Video" value="<%= product.video %>">
+            <br><br>
+            <input type="file" name="image">
+            <br><br>
+            <img src="images/background/<%= product.image %>" alt="">
+            <br><br>
+            <button>Update product</button>
+        </form>
+    </body>
+</html>

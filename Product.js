@@ -7,6 +7,10 @@ class Product {
         this.video = video;
     }
 
+    static getProductById(id) {
+        return arrProducts.find(e => e.id == id);
+    }
+
     static getAllProducts() {
         return arrProducts;
     }
