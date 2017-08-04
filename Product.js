@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class Product {
     constructor(id, title, desc, image, video) {
         this.id = id;
@@ -22,7 +24,14 @@ class Product {
 
     static removeProduct(id) {
         const index = arrProducts.findIndex(e => e.id == id);
+        fs.unlinkSync('./public/images/background/' + arrProducts[index].image);
         arrProducts.splice(index, 1);
+    }
+
+    static updateProduct(id, title, desc, image, video) {
+        const index = arrProducts.findIndex(e => e.id == id);
+        const pr = new Product(id, title, desc, image, video);
+        arrProducts[index] = pr;
     }
 }
 

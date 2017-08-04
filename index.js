@@ -29,6 +29,14 @@ app.post('/add', upload.single('image'), (req, res) => {
     res.redirect('/');
 });
 
+app.post('/update/:id', upload.single('image'), (req, res) => {
+    const { id } = req.params;
+    const { title, video, desc } = req.body;
+    const image = req.file ? req.file.filename : 'default';
+    Product.updateProduct(id, title, desc, image, video);
+    res.redirect('/admin');
+});
+
 app.get('/remove/:id', (req, res) => {
     const { id } = req.params;
     Product.removeProduct(id);

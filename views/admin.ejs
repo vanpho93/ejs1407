@@ -29,7 +29,7 @@
                     <td><img src="images/background/<%= e.image %>"></td>
                     <td><%= e.video %></td>
                     <td>
-                        <a href="/remove/<%= e.id %>">Remove</a>
+                        <a href="/remove/<%= e.id %>" onclick="return confirm('Are you sure?')">Remove</a>
                         <br><br>
                         <a href="/update/<%= e.id %>">Update</a>
                     </td>
