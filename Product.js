@@ -36,12 +36,11 @@ class Product {
 }
 
 const arrProducts = [
-    new Product(1, 'NodeJS', 'Khoa hoc Node tai Khoa Pham.vn', '18081777_th.jpg', '14506031'),
-    new Product(2, 'ReactJS', 'Khoa hoc REactJS tai Khoa Pham.vn', '18081777_th.jpg', '14506031'),
-    new Product(3, 'PHP', 'Khoa hoc Node tai Khoa Pham.vn', '18081777_th.jpg', '14506031'),
-    new Product(4, 'Native', 'Khoa hoc REactJS tai Khoa Pham.vn', '18081777_th.jpg', '14506031'),
-    new Product(5, 'Android', 'Khoa hoc Node tai Khoa Pham.vn', '18081777_th.jpg', '14506031'),
-    new Product(6, 'Java', 'Khoa hoc REactJS tai Khoa Pham.vn', '18081777_th.jpg', '14506031')
+    new Product(1, 'NodeJS', 'Khoa hoc Node tai Khoa Pham.vn', '1.jpg', '227347753'),
+    new Product(2, 'ReactJS', 'Khoa hoc REactJS tai Khoa Pham.vn', '2.jpg', '228740342'),
+    new Product(3, 'PHP', 'Khoa hoc Node tai Khoa Pham.vn', '3.jpg', '226174033'),
+    new Product(4, 'Native', 'Khoa hoc REactJS tai Khoa Pham.vn', '4.jpg', '227890020'),
+    new Product(5, 'Android', 'Khoa hoc Node tai Khoa Pham.vn', '5.jpg', '226541685')
 ];
 
 module.exports = Product;
