@@ -11,13 +11,19 @@ app.use(express.static('public'));
 app.locals.title = 'Hello EJS';
 
 app.get('/', (req, res) => {
-    const arrProducts =  Product.getAllProducts();
-    res.render('index', { arrProducts });
+    // const arrProducts =  Product.getAllProducts();
+    // res.render('index', { arrProducts });
+    Product.getAllProducts((err, products) => {
+        if (err) return res.send(err.message);
+        res.render('index', { arrProducts: products });
+    });
 });
 
 app.get('/admin', (req, res) => {
-    const arrProducts =  Product.getAllProducts();
-    res.render('admin', { arrProducts });
+    Product.getAllProducts((err, products) => {
+        if (err) return res.send(err.message);
+        res.render('admin', { arrProducts: products });
+    });
 });
 
 app.get('/add', (req, res) => res.render('add'));

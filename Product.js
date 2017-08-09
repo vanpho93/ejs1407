@@ -1,4 +1,4 @@
-const fs = require('fs');
+const queryDb = require('./db');
 
 class Product {
     constructor(id, title, desc, image, video) {
@@ -13,8 +13,11 @@ class Product {
         return arrProducts.find(e => e.id == id);
     }
 
-    static getAllProducts() {
-        return arrProducts;
+    static getAllProducts(cb) {
+        queryDb('SELECT * FROM "Product"', (err, result) => {
+            if (err) return cb(err);
+            cb(null, result.rows);
+        });
     }
 
     static addNewProduct(title, desc, image, video) {
@@ -44,3 +47,14 @@ const arrProducts = [
 ];
 
 module.exports = Product;
+
+/*
+
+INSERT INTO public."Product"(title, "desc", image, video)
+	VALUES ('NodeJS 1', 'Khoa hoc Node tai Khoa Pham.vn', '1.jpg', '227347753'),
+    ('ReactJS', 'Khoa hoc REactJS tai Khoa Pham.vn', '2.jpg', '228740342'),
+    ('PHP', 'Khoa hoc Node tai Khoa Pham.vn', '3.jpg', '226174033'),
+    ('Native', 'Khoa hoc REactJS tai Khoa Pham.vn', '4.jpg', '227890020'),
+    ('Android', 'Khoa hoc Node tai Khoa Pham.vn', '5.jpg', '226541685')
+
+*/
