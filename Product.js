@@ -14,7 +14,7 @@ class Product {
     }
 
     static getAllProducts(cb) {
-        queryDb('SELECT * FROM "Product"', (err, result) => {
+        queryDb('SELECT * FROM "Product"', [], (err, result) => {
             if (err) return cb(err);
             cb(null, result.rows);
         });
@@ -24,8 +24,8 @@ class Product {
         // const product = new Product(arrProducts.length, title, desc, image, video);
         // arrProducts.push(product);
         const insertSQL = `INSERT INTO "Product"(title, "desc", image, video) 
-            VALUES('${title}', '${desc}', '${image}', '${video}')`;
-        queryDb(insertSQL, err => cb(err));
+            VALUES($1, $2, $3, $4)`;
+        queryDb(insertSQL, [title, desc, image, video], err => cb(err));
     }
 
     static removeProduct(id) {

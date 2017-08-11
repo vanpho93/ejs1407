@@ -9,10 +9,10 @@ const pool = new pg.Pool({
     max: 20
 });
 
-function queryDb(sql, cb) {
+function queryDb(sql, arrayData, cb) {
     pool.connect((err, client, done) => {
         if (err) return console.log(err.message);
-        client.query(sql, (errQuery, result) => {
+        client.query(sql, arrayData, (errQuery, result) => {
             done(errQuery);
             // return result;
             cb(errQuery, result);
