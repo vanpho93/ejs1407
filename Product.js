@@ -9,8 +9,12 @@ class Product {
         this.video = video;
     }
 
-    static getProductById(id) {
-        return arrProducts.find(e => e.id == id);
+    static getProductById(id, cb) {
+        queryDb('SELECT * FROM "Product" WHERE id = $1', [id], (err, result) => {
+            if (err) return cb(err);
+            if (result.rows.length === 0) cb(new Error('San pham khong ton tai'))
+            cb(null, result.rows[0]);
+        });        
     }
 
     static getAllProducts(cb) {
@@ -28,10 +32,12 @@ class Product {
         queryDb(insertSQL, [title, desc, image, video], err => cb(err));
     }
 
-    static removeProduct(id) {
-        const index = arrProducts.findIndex(e => e.id == id);
-        fs.unlinkSync('./public/images/background/' + arrProducts[index].image);
-        arrProducts.splice(index, 1);
+    static removeProduct(id, cb) {
+        const deleteSQL = 'DELETE FROM "Product" WHERE id = $1';
+        queryDb(deleteSQL, [id], (err) => {
+            cb(err);
+            // fs.unlinkSync('./public/images/background/' + arrProducts[index].image);
+        })
     }
 
     static updateProduct(id, title, desc, image, video) {
@@ -63,3 +69,6 @@ INSERT INTO public."Product"(title, "desc", image, video)
 */
 
 // Product.addNewProduct('a', 'b', 'c', 'd', err => console.log(err));
+// Product.removeProduct(10, err => console.log(err));
+// Product.getProductById(5, (err, product) => console.log(product));
+

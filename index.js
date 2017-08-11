@@ -30,7 +30,7 @@ app.get('/add', (req, res) => res.render('add'));
 
 app.post('/add', upload.single('image'), (req, res) => {
     const { title, video, desc } = req.body;
-    const image = req.file.filename;
+    const image = req.file ? req.file.filename : 'default.png';
     Product.addNewProduct(title, desc, image, video, err => {
         if (err) return res.send(err.message);
         res.redirect('/admin');
@@ -47,14 +47,22 @@ app.post('/update/:id', upload.single('image'), (req, res) => {
 
 app.get('/remove/:id', (req, res) => {
     const { id } = req.params;
-    Product.removeProduct(id);
-    res.redirect('/admin');
+    Product.removeProduct(id, err => {
+        if (err) return res.send(err.message);
+        res.redirect('/admin');
+    });
 });
 
 app.get('/update/:id', (req, res) => {
     const { id } = req.params;
-    const product = Product.getProductById(id);
-    res.render('update', { product });
+    const product = Product.getProductById(id, (err, product) => {
+        if (err) return res.send(err.message);
+        res.render('update', { product });
+    });
+});
+
+app.use((err, req, res, next) => {
+    res.send(err.message);
 });
 
 app.listen(3000, () => console.log('Server started!'))
