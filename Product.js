@@ -20,9 +20,12 @@ class Product {
         });
     }
 
-    static addNewProduct(title, desc, image, video) {
-        const product = new Product(arrProducts.length, title, desc, image, video);
-        arrProducts.push(product);
+    static addNewProduct(title, desc, image, video, cb) {
+        // const product = new Product(arrProducts.length, title, desc, image, video);
+        // arrProducts.push(product);
+        const insertSQL = `INSERT INTO "Product"(title, "desc", image, video) 
+            VALUES('${title}', '${desc}', '${image}', '${video}')`;
+        queryDb(insertSQL, err => cb(err));
     }
 
     static removeProduct(id) {
@@ -58,3 +61,5 @@ INSERT INTO public."Product"(title, "desc", image, video)
     ('Android', 'Khoa hoc Node tai Khoa Pham.vn', '5.jpg', '226541685')
 
 */
+
+// Product.addNewProduct('a', 'b', 'c', 'd', err => console.log(err));

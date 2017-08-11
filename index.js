@@ -31,8 +31,10 @@ app.get('/add', (req, res) => res.render('add'));
 app.post('/add', upload.single('image'), (req, res) => {
     const { title, video, desc } = req.body;
     const image = req.file.filename;
-    Product.addNewProduct(title, desc, image, video);
-    res.redirect('/');
+    Product.addNewProduct(title, desc, image, video, err => {
+        if (err) return res.send(err.message);
+        res.redirect('/admin');
+    });
 });
 
 app.post('/update/:id', upload.single('image'), (req, res) => {
@@ -57,4 +59,4 @@ app.get('/update/:id', (req, res) => {
 
 app.listen(3000, () => console.log('Server started!'))
 
-reload(app);
+// reload(app);
