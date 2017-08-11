@@ -40,10 +40,9 @@ class Product {
         })
     }
 
-    static updateProduct(id, title, desc, image, video) {
-        const index = arrProducts.findIndex(e => e.id == id);
-        const pr = new Product(id, title, desc, image, video);
-        arrProducts[index] = pr;
+    static updateProduct(id, title, desc, image, video, cb) {
+        const updateSQL = `UPDATE public."Product" SET title=$1, "desc"=$2, image=$3, video=$4 WHERE id = $5;`;
+        queryDb(updateSQL, [title, desc, image, video, id], (err) => cb(err));
     }
 }
 
@@ -71,4 +70,4 @@ INSERT INTO public."Product"(title, "desc", image, video)
 // Product.addNewProduct('a', 'b', 'c', 'd', err => console.log(err));
 // Product.removeProduct(10, err => console.log(err));
 // Product.getProductById(5, (err, product) => console.log(product));
-
+// Product.updateProduct(15, 'a', 'b', 'c', 1039011, err => console.log(err));
